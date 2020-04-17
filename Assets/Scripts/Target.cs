@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 [RequireComponent(typeof(Collider))]
-public class Target : MonoBehaviour
+public class Target : Subject
 {
 
     private const float TIME_TO_DESTROY = 10F;
@@ -26,16 +26,19 @@ public class Target : MonoBehaviour
 
         if (collidedObjectLayer.Equals(Utils.BulletLayer))
         {
+            Notify(true);
             Destroy(collision.gameObject);
 
             currentHP -= 1;
 
             if (currentHP <= 0)
             {
+                Notify(true);
                 Player player = FindObjectOfType<Player>();
 
                 if (player != null)
                 {
+                    Notify(true);
                     player.Score += scoreAdd;
                 }
 
@@ -49,6 +52,7 @@ public class Target : MonoBehaviour
 
             if (player != null)
             {
+                Notify(true);
                 player.Lives -= 1;
 
                 if (player.Lives <= 0 && player.OnPlayerDied != null)

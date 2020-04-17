@@ -102,10 +102,8 @@ public class Player : MonoBehaviour
             if ((Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
                 && CanShoot)
             {
-                PoolBalas.Instantiate<Rigidbody>(bullet, bulletSpawnPoint.position, bulletSpawnPoint.rotation).AddForce(transform.up * bulletSpeed, ForceMode.Impulse);
-
-               
-               
+                Instantiate(bullet, bulletSpawnPoint.position, bulletSpawnPoint.rotation).AddForce(transform.up * bulletSpeed, ForceMode.Impulse);
+                
             }
 
         }

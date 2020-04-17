@@ -1166,7 +1166,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 017b284984c830c4782b0e19e8cab68c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefab: {fileID: 2964337092940765685, guid: 659cbe9196140434f8585826b82346ba, type: 3}
+  prefab: {fileID: 2627135051368097643, guid: 66c2fad4b964999488879a54fc3c5564, type: 3}
+  prefab2: {fileID: 2627135051368097643, guid: a57facc0ab4ba144e8a7de39761c5d6e, type: 3}
+  prefab3: {fileID: 2627135051368097643, guid: b5f0d6b4e9ba9704a9e36c5bac0a930b, type: 3}
 --- !u!1 &1181273066
 GameObject:
   m_ObjectHideFlags: 0
@@ -1403,6 +1405,7 @@ GameObject:
   - component: {fileID: 2018314405}
   - component: {fileID: 2018314404}
   - component: {fileID: 2018314408}
+  - component: {fileID: 2018314409}
   m_Layer: 9
   m_Name: Player
   m_TagString: Untagged
@@ -1500,3 +1503,16 @@ MonoBehaviour:
   bullet: {fileID: 5769844902801545485, guid: 659cbe9196140434f8585826b82346ba, type: 3}
   bulletSpawnPoint: {fileID: 8458616}
   bulletSpeed: 10
+--- !u!114 &2018314409
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2018314403}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7813e98509dfad4993fab14eb3415a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefabs: {fileID: 2964337092940765685, guid: 659cbe9196140434f8585826b82346ba, type: 3}

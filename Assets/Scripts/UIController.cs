@@ -2,7 +2,7 @@
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class UIController : MonoBehaviour
+public class UIController : Observer
 {
     private Player playerRef;
 
@@ -23,52 +23,59 @@ public class UIController : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
-    // Start is called before the first frame update
-    private void Start()
+
+
+    public override void OnNotify(bool hit)
     {
-        ToggleRestartButton(false);
-
-        playerRef = FindObjectOfType<Player>();
-
-        if (playerRef != null && lifeImages.Length == Player.PLAYER_LIVES)
+        if (hit == true)
         {
-            InvokeRepeating("UpdateUI", 0F, tickRate);
-        }
-    }
-
-    private void ToggleRestartButton(bool val)
-    {
-        if (restartBtn != null)
-        {
-            restartBtn.gameObject.SetActive(val);
-        }
-    }
-
-    private void UpdateUI()
-    {
-        for (int i = 0; i < lifeImages.Length; i++)
-        {
-            if (lifeImages[i] != null && lifeImages[i].enabled)
+            void Start()
             {
-                lifeImages[i].gameObject.SetActive(playerRef.Lives >= i + 1);
-            }
-        }
+                ToggleRestartButton(false);
 
-        if (scoreLabel != null)
-        {
-            scoreLabel.text = playerRef.Score.ToString();
-        }
+                playerRef = FindObjectOfType<Player>();
 
-        if (playerRef.Lives <= 0)
-        {
-            CancelInvoke();
-
-            if (scoreLabel != null)
-            {
-                scoreLabel.text = "Game Over";
+                if (playerRef != null && lifeImages.Length == Player.PLAYER_LIVES)
+                {
+                    InvokeRepeating("UpdateUI", 0F, tickRate);
+                }
             }
 
-            ToggleRestartButton(true);
+            void ToggleRestartButton(bool val)
+            {
+                if (restartBtn != null)
+                {
+                    restartBtn.gameObject.SetActive(val);
+                }
+
+                void UpdateUI(bool va)
+                {
+                    for (int i = 0; i < lifeImages.Length; i++)
+                    {
+                        if (lifeImages[i] != null && lifeImages[i].enabled)
+                        {
+                            lifeImages[i].gameObject.SetActive(playerRef.Lives >= i + 1);
+                        }
+                    }
+
+                    if (scoreLabel != null)
+                    {
+                        scoreLabel.text = playerRef.Score.ToString();
+                    }
+
+                    if (playerRef.Lives <= 0)
+                    {
+                        CancelInvoke();
+
+                        if (scoreLabel != null)
+                        {
+                            scoreLabel.text = "Game Over";
+                        }
+
+                        ToggleRestartButton(true);
+                    }
+                }
+            }
         }
     }
 }

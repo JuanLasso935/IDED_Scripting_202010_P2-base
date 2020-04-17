@@ -51,6 +51,5 @@ public class PoolBalas : MonoBehaviour
         go.SetActive(false);
         pool2.Add(go);
         }
-        
 
 }
