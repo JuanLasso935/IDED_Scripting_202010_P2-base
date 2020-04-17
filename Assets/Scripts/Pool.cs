@@ -1,11 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static Player;
 
 public class Pool : MonoBehaviour
 {
-    [SerializeField] private GameObject prefab;
+    [SerializeField]
+    private GameObject prefab;
+
+    [SerializeField]
+
+    private GameObject prefab2;
+
+    [SerializeField]
+    private GameObject prefab3;
 
     public static Pool Instance { get; private set; }
     private Queue<GameObject> objects = new Queue<GameObject>();
@@ -34,11 +41,12 @@ public class Pool : MonoBehaviour
     private void AddObjects(int count)
     {
         var newObject = GameObject.Instantiate(prefab);
+
         newObject.SetActive(false);
         objects.Enqueue(newObject);
 
 
-       newObject.GetComponent<IGameObjectPooled>().Pool = this;
+       newObject.GetComponent<SpawnController.IGameObjectPooled>().Pool = this;
     }
 
 }

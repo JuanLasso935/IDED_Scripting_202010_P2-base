@@ -9,18 +9,6 @@ public class Player : MonoBehaviour
 
     private const float PLAYER_RADIUS = 0.4F;
 
-    private Pool pool;
-    public Pool Pool
-    {
-        get { return pool; }
-        set
-        {
-            if (pool == null)
-                pool = value;
-            else
-                throw new System.Exception("Error");
-        }
-    }
 
     [Header("Movement")]
     [SerializeField]
@@ -113,18 +101,14 @@ public class Player : MonoBehaviour
 
             if ((Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
                 && CanShoot)
-            {             
+            {
+                PoolBalas.Instantiate<Rigidbody>(bullet, bulletSpawnPoint.position, bulletSpawnPoint.rotation).AddForce(transform.up * bulletSpeed, ForceMode.Impulse);
 
-                    ; Instantiate<Rigidbody>
-                   (bullet, bulletSpawnPoint.position, bulletSpawnPoint.rotation)
-                   .AddForce(transform.up * bulletSpeed, ForceMode.Impulse);
+               
+               
             }
 
         }
     }
-
-    internal interface IGameObjectPooled
-    {
-        Pool Pool { get; set; }
-    }
+    
 }

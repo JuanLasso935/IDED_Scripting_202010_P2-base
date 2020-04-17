@@ -2,6 +2,21 @@
 
 public class SpawnController : MonoBehaviour
 {
+
+    private Pool pool;
+    public Pool Pool
+    {
+        get { return pool; }
+        set
+        {
+            if (pool == null)
+                pool = value;
+            else
+                throw new System.Exception("Error");
+        }
+    }
+
+
     [SerializeField]
     private GameObject[] spawnObjects;
 
@@ -15,6 +30,8 @@ public class SpawnController : MonoBehaviour
     private Player player;
 
     private Vector3 spawnPoint;
+
+
 
     private bool IsThereAtLeastOneObjectToSpawn
     {
@@ -60,12 +77,18 @@ public class SpawnController : MonoBehaviour
                 Random.Range(0F, 1F), 1F, transform.position.z));
 
             GameObject instance = Instantiate(spawnGO, spawnPoint, Quaternion.identity);
-            
+            pool.ReturnToPool(gameObject);
         }
+        
     }
 
     private void StopSpawning()
     {
         CancelInvoke();
+    }
+
+    internal interface IGameObjectPooled
+    {
+        Pool Pool { get; set; }
     }
 }

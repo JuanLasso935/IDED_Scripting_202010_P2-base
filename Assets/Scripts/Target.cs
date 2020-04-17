@@ -3,6 +3,7 @@
 [RequireComponent(typeof(Collider))]
 public class Target : MonoBehaviour
 {
+
     private const float TIME_TO_DESTROY = 10F;
 
     [SerializeField]
@@ -57,6 +58,9 @@ public class Target : MonoBehaviour
             }
 
             Destroy(gameObject);
+
+
         }
     }
+
 }
