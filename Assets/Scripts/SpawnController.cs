@@ -77,7 +77,7 @@ public class SpawnController : MonoBehaviour
                 Random.Range(0F, 1F), 1F, transform.position.z));
 
             GameObject instance = Instantiate(spawnGO, spawnPoint, Quaternion.identity);
-            Pool.ReturnToPool(spawnGO);
+            Pool.ReturnToPool(gameObject);
         }
         
     }

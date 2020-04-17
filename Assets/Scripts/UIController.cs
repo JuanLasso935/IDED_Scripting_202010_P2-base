@@ -24,56 +24,56 @@ public class UIController : Observer
     }
 
 
-
     public override void OnNotify(bool hit)
     {
         if (hit == true)
         {
-            void Start()
+            void UpdateUI()
             {
-                ToggleRestartButton(false);
-
-                playerRef = FindObjectOfType<Player>();
-
-                if (playerRef != null && lifeImages.Length == Player.PLAYER_LIVES)
+                for (int i = 0; i < lifeImages.Length; i++)
                 {
-                    InvokeRepeating("UpdateUI", 0F, tickRate);
-                }
-            }
-
-            void ToggleRestartButton(bool val)
-            {
-                if (restartBtn != null)
-                {
-                    restartBtn.gameObject.SetActive(val);
-                }
-
-                void UpdateUI(bool va)
-                {
-                    for (int i = 0; i < lifeImages.Length; i++)
+                    if (lifeImages[i] != null && lifeImages[i].enabled)
                     {
-                        if (lifeImages[i] != null && lifeImages[i].enabled)
-                        {
-                            lifeImages[i].gameObject.SetActive(playerRef.Lives >= i + 1);
-                        }
+                        lifeImages[i].gameObject.SetActive(playerRef.Lives >= i + 1);
                     }
+                }
+
+                if (scoreLabel != null)
+                {
+                    scoreLabel.text = playerRef.Score.ToString();
+                }
+
+                if (playerRef.Lives <= 0)
+                {
+                    CancelInvoke();
 
                     if (scoreLabel != null)
                     {
-                        scoreLabel.text = playerRef.Score.ToString();
+                        scoreLabel.text = "Game Over";
                     }
 
-                    if (playerRef.Lives <= 0)
-                    {
-                        CancelInvoke();
+                    ToggleRestartButton(true);
+                }
 
-                        if (scoreLabel != null)
+                void Start()
+                {
+                        ToggleRestartButton(false);
+
+                        playerRef = FindObjectOfType<Player>();
+
+                        if (playerRef != null && lifeImages.Length == Player.PLAYER_LIVES)
                         {
-                            scoreLabel.text = "Game Over";
-                        }
+                            InvokeRepeating("UpdateUI", 0F, tickRate);
+                        }                  
+                }
 
-                        ToggleRestartButton(true);
+                void ToggleRestartButton(bool val)
+                {
+                    if (restartBtn != null)
+                    {
+                        restartBtn.gameObject.SetActive(val);
                     }
+
                 }
             }
         }

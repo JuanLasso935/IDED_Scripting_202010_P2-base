@@ -57,6 +57,7 @@ public class Target : Subject
 
                 if (player.Lives <= 0 && player.OnPlayerDied != null)
                 {
+                    Notify(true);
                     player.OnPlayerDied();
                 }
             }
